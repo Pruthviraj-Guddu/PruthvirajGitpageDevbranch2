@@ -1,19 +1,50 @@
-<svg id="identicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <title>Pruthviraj Guddu</title>
+<svg id="identicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 32">
+    <title>Pruthviraj</title>
     
-    <!-- Horizontal lines with varied thickness and color -->
-    <line x1="25.60999" y1="16" x2="6.39829" y2="16" stroke="blue" stroke-width="2"/>
-    <line x1="15.99998" y1="32" x2="15.99998" stroke="red" stroke-width="2"/>
-    <line x1="25.60999" y1="3.19995" x2="6.39829" y2="3.19995" stroke="green" stroke-width="2"/>
-    
-    <!-- Vertical lines with varied thickness and color -->
-    <line x1="6.40537" y1="28.80403" x2="0.00005" y2="28.80403" stroke="purple" stroke-width="1.5"/>
-    <line x1="32.00996" y1="28.80403" x2="25.60464" y2="28.80403" stroke="orange" stroke-width="1.5"/>
+    <!-- P -->
+    <line x1="10" y1="4" x2="10" y2="28" stroke="blue" stroke-width="2"/>
+    <line x1="10" y1="4" x2="20" y2="4" stroke="blue" stroke-width="2"/>
+    <line x1="20" y1="4" x2="20" y2="16" stroke="blue" stroke-width="2"/>
 
-    <!-- New circles to add to the design -->
-    <circle cx="8" cy="8" r="4" stroke="black" stroke-width="1" fill="yellow" opacity="0.6"/>
-    <circle cx="24" cy="24" r="3" stroke="black" stroke-width="1" fill="cyan" opacity="0.6"/>
+    <!-- R -->
+    <line x1="30" y1="4" x2="30" y2="28" stroke="red" stroke-width="2"/>
+    <line x1="30" y1="4" x2="40" y2="4" stroke="red" stroke-width="2"/>
+    <line x1="40" y1="4" x2="40" y2="16" stroke="red" stroke-width="2"/>
+    <line x1="30" y1="16" x2="40" y2="16" stroke="red" stroke-width="2"/>
     
-    <!-- Central circle to add a focus point -->
-    <circle cx="16" cy="16" r="2" stroke="black" stroke-width="1" fill="pink"/>
+    <!-- U -->
+    <line x1="50" y1="4" x2="50" y2="24" stroke="green" stroke-width="2"/>
+    <line x1="50" y1="24" x2="60" y2="24" stroke="green" stroke-width="2"/>
+    <line x1="60" y1="4" x2="60" y2="24" stroke="green" stroke-width="2"/>
+
+    <!-- T -->
+    <line x1="70" y1="4" x2="70" y2="28" stroke="orange" stroke-width="2"/>
+    <line x1="60" y1="4" x2="80" y2="4" stroke="orange" stroke-width="2"/>
+    
+    <!-- H -->
+    <line x1="90" y1="4" x2="90" y2="28" stroke="purple" stroke-width="2"/>
+    <line x1="90" y1="16" x2="110" y2="16" stroke="purple" stroke-width="2"/>
+    <line x1="110" y1="4" x2="110" y2="28" stroke="purple" stroke-width="2"/>
+    
+    <!-- V -->
+    <line x1="120" y1="4" x2="130" y2="24" stroke="yellow" stroke-width="2"/>
+    <line x1="130" y1="24" x2="140" y2="4" stroke="yellow" stroke-width="2"/>
+    
+    <!-- I -->
+    <line x1="145" y1="4" x2="145" y2="28" stroke="cyan" stroke-width="2"/>
+    
+    <!-- R -->
+    <line x1="150" y1="4" x2="150" y2="28" stroke="red" stroke-width="2"/>
+    <line x1="150" y1="4" x2="160" y2="4" stroke="red" stroke-width="2"/>
+    <line x1="160" y1="4" x2="160" y2="16" stroke="red" stroke-width="2"/>
+    <line x1="150" y1="16" x2="160" y2="16" stroke="red" stroke-width="2"/>
+    
+    <!-- A -->
+    <line x1="170" y1="28" x2="180" y2="4" stroke="pink" stroke-width="2"/>
+    <line x1="180" y1="4" x2="190" y2="28" stroke="pink" stroke-width="2"/>
+    <line x1="175" y1="16" x2="185" y2="16" stroke="pink" stroke-width="2"/>
+    
+    <!-- J -->
+    <line x1="195" y1="4" x2="195" y2="24" stroke="brown" stroke-width="2"/>
+    <line x1="195" y1="24" x2="205" y2="24" stroke="brown" stroke-width="2"/>
 </svg>
