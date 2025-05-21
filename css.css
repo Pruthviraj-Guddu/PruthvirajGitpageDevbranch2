@@ -4,7 +4,9 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
-  background-color: yellowgreen;
+
+  background-color: #d9bcf5;
+
 }
 
 .container {
@@ -17,15 +19,19 @@ button {
   margin: 10px;
   cursor: pointer;
 }
+
 #yesBtn {
   padding: 10px 20px;
   font-size: 16px;
   margin: 10px;
   cursor: pointer;
-  background-color: #009705; /* verde */
+  background-color: #009705;
+  /* verde */
   color: white;
-  border: 2px solid #ffc0cb; /* Bordes rosa */
-  border-radius: 10px; /* Esquinas redondeadas */
+  border: 2px solid #ffc0cb;
+  /* Bordes rosa */
+  border-radius: 10px;
+  /* Esquinas redondeadas */
 }
 
 #noBtn {
@@ -33,37 +39,50 @@ button {
   font-size: 16px;
   margin: 10px;
   cursor: pointer;
-  background-color: #ff5733; /* Rojo */
+  background-color: #ff5733;
+  /* Rojo */
   color: white;
-  border: 2px solid #ffc0cb; /* Bordes rosa */
-  border-radius: 10px; /* Esquinas redondeadas */
+  border: 2px solid #ffc0cb;
+  /* Bordes rosa */
+  border-radius: 10px;
+  /* Esquinas redondeadas */
 }
+
 #noBtn span {
   font-size: 18px;
-  color: #fcf4f4; /* Cambia el color del texto según tus preferencias */
+  color: #fcf4f4;
+  /* Cambia el color del texto según tus preferencias */
   /* Otras propiedades de estilo aquí */
 }
 
 #noBtn:hover {
-  background-color: #641e0d; /* Cambia a otro color en hover, puedes ajustar el valor según tus preferencias */
+  background-color: #641e0d;
+  /* Cambia a otro color en hover, puedes ajustar el valor según tus preferencias */
 }
+
 .bg-green {
-  background-color: #ffffff; /* Nuevo color de fondo verde */
+  background-color: #ffffff;
+  /* Nuevo color de fondo verde */
 }
 
 #messageContainer {
   font-size: 30px;
   color: #009dff;
-  font-family: "YourDesiredFont", sans-serif; /* Reemplaza 'YourDesiredFont' con la fuente que desees */
-  text-shadow: 2px 2px 4px #000; /* Borde simulado */
-  animation: pulse 0.5s infinite alternate; /* Animación de palpitación más rápida */
+  font-family: "YourDesiredFont", sans-serif;
+  /* Reemplaza 'YourDesiredFont' con la fuente que desees */
+  text-shadow: 2px 2px 4px #000;
+  /* Borde simulado */
+  animation: pulse 0.5s infinite alternate;
+  /* Animación de palpitación más rápida */
 }
 
 @keyframes pulse {
   from {
     transform: scale(1);
   }
+
   to {
-    transform: scale(1.3); /* Zoom más grande */
+    transform: scale(1.3);
+    /* Zoom más grande */
   }
 }
