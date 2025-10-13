@@ -13,86 +13,126 @@ function makeparticle() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // Particle class
+  // Cloud/Smoke particle class
   class Particle {
-    constructor(x, y, radius, color, velocity) {
-      this.x = x;
-      this.y = y;
-      this.radius = radius;
-      this.color = color;
-      this.velocity = velocity;
-      this.opacity = 0.5; // Initial opacity
+    constructor() {
+      this.reset();
+      this.y = Math.random() * canvas.height;
+      this.opacity = 0;
+    }
+
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = canvas.height + Math.random() * 100;
+      this.size = Math.random() * 15 + 5;
+      this.speedX = Math.random() * 0.2 - 0.1;
+      this.speedY = Math.random() * -0.5 - 0.2;
+      this.opacity = Math.random() * 0.2;
+      this.targetOpacity = Math.random() * 0.6 + 0.1;
+      this.growth = Math.random() * 0.2 + 0.01;
+      this.angle = Math.random() * Math.PI * 2;
+      this.rotationSpeed = Math.random() * 0.01 - 0.005;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.angle += this.rotationSpeed;
+      
+      // Gradually increase opacity to target
+      if (this.opacity < this.targetOpacity) {
+        this.opacity += 0.005;
+      }
+      
+      // Random size fluctuation
+      this.size += Math.random() * 0.2 - 0.1;
+      
+      // Reset particle if it goes off screen
+      if (this.y < -this.size || this.opacity <= 0) {
+        this.reset();
+      }
     }
 
     draw() {
       ctx.save();
       ctx.globalAlpha = this.opacity;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.closePath();
+      
+      // Create cloud-like shape with multiple circles
+      for (let i = 0; i < 3; i++) {
+        const offsetX = Math.cos(this.angle + i * Math.PI * 2/3) * this.size * 0.6;
+        const offsetY = Math.sin(this.angle + i * Math.PI * 2/3) * this.size * 0.6;
+        
+        ctx.beginPath();
+        ctx.arc(
+          this.x + offsetX, 
+          this.y + offsetY, 
+          this.size * 0.7, 
+          0, 
+          Math.PI * 2
+        );
+        
+        // Use a gradient for a more natural look
+        const gradient = ctx.createRadialGradient(
+          this.x + offsetX, 
+          this.y + offsetY, 
+          0, 
+          this.x + offsetX, 
+          this.y + offsetY, 
+          this.size * 0.7
+        );
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity * 0.8})`);
+        gradient.addColorStop(1, `rgba(200, 200, 200, ${this.opacity * 0.2})`);
+        
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+      
       ctx.restore();
-    }
-
-    update(particles) {
-      this.draw();
-
-      // Update position
-      this.x += this.velocity.x;
-      this.y += this.velocity.y;
-
-      // Bounce off edges
-      if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-        this.velocity.x = -this.velocity.x;
-      }
-      if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-        this.velocity.y = -this.velocity.y;
-      }
-
-      // Draw lines between particles
-      particles.forEach((particle) => {
-        const distance = Math.hypot(this.x - particle.x, this.y - particle.y);
-        if (distance < 150) {
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(particle.x, particle.y);
-          ctx.strokeStyle = `rgba(0, 0, 0, ${1 - distance / 150})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-          ctx.closePath();
-        }
-      });
     }
   }
 
   // Create particles
   const particles = [];
-  const numberOfParticles = 60; // Adjust as needed
-  const color = "#000000"; // Particle color
+  const numberOfParticles = 30; // Fewer particles since they're larger
 
   function init() {
-    particles.length = 0; // Clear existing particles
+    particles.length = 0;
     for (let i = 0; i < numberOfParticles; i++) {
-      const radius = Math.random() * 3 + 1; // Random size (small particles)
-      const x = Math.random() * (canvas.width - radius * 2) + radius;
-      const y = Math.random() * (canvas.height - radius * 2) + radius;
-      const velocity = {
-        x: (Math.random() - 0.5) * 2, // Random horizontal speed
-        y: (Math.random() - 0.5) * 2, // Random vertical speed
-      };
-      particles.push(new Particle(x, y, radius, color, velocity));
+      particles.push(new Particle());
+      // Stagger their initial positions
+      particles[i].y = Math.random() * canvas.height;
     }
   }
 
   // Animation loop
   function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Create a semi-transparent background for motion blur effect
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach((particle) => {
-      particle.update(particles);
+    // Update and draw particles
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+      
+      // Connect nearby particles with faint lines
+      particles.forEach(otherParticle => {
+        const distance = Math.hypot(
+          particle.x - otherParticle.x, 
+          particle.y - otherParticle.y
+        );
+        if (distance < 150) {
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(otherParticle.x, otherParticle.y);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - distance/150) * particle.opacity * 0.2})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
     });
+
+    requestAnimationFrame(animate);
   }
 
   // Initialize and start animation
@@ -103,22 +143,23 @@ function makeparticle() {
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    init();
   });
 
-  // Handle click interaction (push particles)
-  canvas.addEventListener("click", (event) => {
+  // Handle mouse interaction - push particles away
+  canvas.addEventListener("mousemove", (event) => {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
-
-    for (let i = 0; i < 4; i++) {
-      const radius = Math.random() * 3 + 1;
-      const velocity = {
-        x: (Math.random() - 0.5) * 2,
-        y: (Math.random() - 0.5) * 2,
-      };
-      particles.push(new Particle(mouseX, mouseY, radius, color, velocity));
-    }
+    
+    particles.forEach(particle => {
+      const distance = Math.hypot(particle.x - mouseX, particle.y - mouseY);
+      if (distance < 100) {
+        // Push particles away from mouse
+        const angle = Math.atan2(particle.y - mouseY, particle.x - mouseX);
+        const force = (100 - distance) / 50;
+        particle.x += Math.cos(angle) * force;
+        particle.y += Math.sin(angle) * force;
+      }
+    });
   });
 }
 
